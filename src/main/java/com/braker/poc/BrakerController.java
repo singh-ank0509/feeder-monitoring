@@ -33,9 +33,15 @@ public class BrakerController {
 	}
 	
 	@GetMapping("/substation")
-	public ResponseEntity<?> getSubstation(@RequestParam(defaultValue = "ALL") String substation) 
+	public ResponseEntity<?> getSubstation() 
 	{		
-		return brakerService.getSubstation(substation);
+		return brakerService.getSubstation();
+	}
+	
+	@GetMapping("/feeder")
+	public ResponseEntity<?> getFeeders(@RequestParam(defaultValue = "ALL") String substation) 
+	{		
+		return brakerService.getFeeders(substation);
 	}
 	
 	@PostMapping("/register-user")
@@ -44,7 +50,7 @@ public class BrakerController {
 		return ResponseEntity.ok(brakerService.registerUser(dto));
 	}
 	
-	@GetMapping("/login")
+	@PostMapping("/login")
 	public ResponseEntity<?> login(@RequestBody UserDto dto)
 	{		
 		try {
@@ -53,5 +59,18 @@ public class BrakerController {
 			ex.printStackTrace();
         	return new ResponseEntity<String>(ex.getMessage(), HttpStatus.UNAUTHORIZED);
 		}
+	}
+	
+	@GetMapping("/feeder-summary")
+	public ResponseEntity<?> getFeederSummary(@RequestParam(defaultValue = "ALL") String substation,
+										@RequestParam(defaultValue = "ALL") String braker,
+										@RequestParam(defaultValue = "ALL") String status,
+										@RequestParam(defaultValue = "ALL") String changeReason,
+										@RequestParam(defaultValue = "ALL") String tagStatus,
+										@RequestParam(defaultValue = "ALL") String rtuErrorFlag,
+										@RequestParam String startDate,
+										@RequestParam String endDate) 
+	{		
+		return brakerService.getFeederSummary(substation, braker, status, changeReason, tagStatus, rtuErrorFlag, startDate, endDate);
 	}
 }

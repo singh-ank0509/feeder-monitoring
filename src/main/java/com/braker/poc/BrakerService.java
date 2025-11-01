@@ -49,8 +49,20 @@ public class BrakerService {
         return passwordEncoder.matches(rawPassword, encodedPassword);
     }
 
-	public ResponseEntity<?> getSubstation(String substation) {
-		List<BrakerI> substations = userRepository.getSubstation(substation);
+	public ResponseEntity<?> getSubstation() {
+		List<BrakerI> substations = userRepository.getSubstation();
 		return ResponseEntity.ok(substations);
+	}
+	
+	public ResponseEntity<?> getFeeders(String substation) {
+		List<BrakerI> feeders = userRepository.getFeeder(substation);
+		return ResponseEntity.ok(feeders);
+	}
+
+	public ResponseEntity<?> getFeederSummary(String substation, String braker, String status, String changeReason,
+			String tagStatus, String rtuErrorFlag, String startDate, String endDate) 
+	{
+		List<FeederSummaryI> feederSummary = userRepository.getFeederSummary(substation, braker, status, changeReason, tagStatus, rtuErrorFlag, startDate, endDate);
+		return ResponseEntity.ok(feederSummary);
 	}
 }
