@@ -29,8 +29,14 @@ public class ApiKeyAuthFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
 
         String apiKey = request.getHeader(headerName);
+        String path = request.getRequestURI();   
+        String method = request.getMethod();
 
-        String path = request.getRequestURI();
+        if ("OPTIONS".equalsIgnoreCase(method)) {
+            response.setStatus(HttpServletResponse.SC_OK);
+            filterChain.doFilter(request, response);
+            return;
+        }
         if (path.startsWith("/api/v1/register-user") || path.startsWith("/api/v1/login")) {
             filterChain.doFilter(request, response);
             return;
