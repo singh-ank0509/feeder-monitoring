@@ -40,7 +40,7 @@ public class BrakerService {
 
 		Users user = new Users();
 		user.setUsername("admin");
-		user.setPassword("password");
+		user.setPassword("$2a$16$NUAN1FDOLyTH48FqMxEULe6R2V7AyToLsh1v2s266xxfOy3ZV3Sc6");
         if (!checkPassword(dto.getPassword(), user.getPassword())) {
             throw new RuntimeException("Invalid username or password");
         }
@@ -69,3 +69,4 @@ public class BrakerService {
 		return ResponseEntity.ok(feederSummary);
 	}
 }
+
