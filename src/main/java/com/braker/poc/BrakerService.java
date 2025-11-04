@@ -69,4 +69,3 @@ public class BrakerService {
 		return ResponseEntity.ok(feederSummary);
 	}
 }
-
