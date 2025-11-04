@@ -21,4 +21,6 @@ WORKDIR /app
 COPY --from=builder /app/target/*.jar app.jar
 
 EXPOSE 9090
-CMD ["-jar", "app.jar"]
+#CMD ["-jar", "app.jar"]
+ENV TZ=Asia/Kolkata
+CMD ["-Duser.timezone=Asia/Kolkata", "-jar", "app.jar"]
